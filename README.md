@@ -1,61 +1,143 @@
-# ShieldKnot AI v2 — THIRAZEN Demo
+# ShieldKnot AI v2
 
-ShieldKnot AI is a **defense-only transaction-risk demonstration**. **THIRAZEN** is the branding/parent identity; the AI/product name remains **ShieldKnot AI**.
+<p align="center">
+  <img src="static/ShieldKnot_AI_V2_Proper_Banner.gif" alt="ShieldKnot AI v2" width="900">
+</p>
 
-## What is actually implemented
+<p align="center">
+  <strong>DEFENSIVE FRAUD INTELLIGENCE</strong><br>
+  <em>AI works with you. People stay in control.</em>
+</p>
 
-- Fraud transaction scoring: `POST /api/score`
-- Return-risk scorer: `POST /api/return-risk`
-- Fraud-spike detector: `GET /api/spike`
-- Abuse-ring sentinel: `GET /api/abuse-ring` for observed shared device/IP groups
-- Chargeback evidence responder: `GET/POST /api/chargeback-evidence/{transaction_id}`
-- Transaction investigation: `GET /api/investigate/{transaction_id}`
-- Deterministic response policy: `GET /api/response-policy`
-- Local outcome reward calculation: `POST /api/outcomes`
-- Model/held-out metrics: `GET /api/model`
-- Truthful component status: `GET /api/system-status`
-- Seeded local demo authentication: `/api/auth/demo-users` and `/api/auth/login`
-- Responsive PC/tablet/mobile UI
-- THIRAZEN branding asset at `/static/thirazen-logo.png`
+---
 
-## Demo incident workflow
+## THIRAZEN™
 
-The local demo includes a deterministic **demo incident engine** so the Incident Queue is populated every time without pretending that a real production alert occurred.
+**Turning ideas into products.**
 
-The four scenarios are explicitly labelled `SIMULATED DEMO SCENARIO`:
+## ShieldKnot AI
 
-1. Fraud-spike detector demonstration
-2. Elevated return-risk pattern
-3. Chargeback evidence review
-4. Connected-risk cluster demonstration
+**Defensive Fraud Intelligence**
 
-Each scenario references synthetic dataset transactions and can be opened in Investigation. The workflow demonstrates:
+ShieldKnot AI v2 is a defensive transaction-risk demonstration built to detect suspicious patterns, investigate evidence, explain risk signals, and keep consequential responses under human control.
 
-`detector → incident → evidence → investigation → response policy → human review → outcome`
+> **Human review remains required for consequential actions.**
 
-Recorded outcomes are written to `data/outcomes.jsonl`. `POST /api/demo/reset` resets the demo outcome state without modifying the synthetic transaction dataset.
+## What the demo demonstrates
 
-## What is not included
+**Detect → Investigate → Explain → Human Review → Respond**
 
-PostgreSQL, Redis, Redpanda/Kafka and external LLM services are **not** part of this repository. The UI does not claim they are active.
+### Implemented defensive services
 
-The reward model is a transparent local outcome-reward calculator, not a separately trained neural reward model.
+| Component | Purpose |
+|---|---|
+| Fraud-Spike Detector | Detects unusual transaction-risk spikes. |
+| Return-Risk Scorer | Scores return-related risk using the local model/data pipeline. |
+| Chargeback Evidence Responder | Prepares evidence for human review; it does not autonomously submit disputes. |
+| Abuse-Ring Sentinel | Surfaces shared device/IP patterns and related demo incidents. |
+| Fraud Model | Local transaction-risk model used by the scoring pipeline. |
+| Checkpoint | Local model checkpoint artifact. |
+| Reward Model | Transparent local reward/outcome calculator. |
+| Response Policy | Deterministic defensive policy with human-review requirements. |
+| Demo Incident Engine | Generates deterministic simulated incidents for demonstrations. |
 
-## Run
+## Demo incidents
 
-```powershell
-python -m pip install -r requirements.txt
+The project includes deterministic simulated scenarios so the complete workflow can be demonstrated without relying on live fraud:
+
+- `SPIKE-DEMO-001` — fraud-spike scenario
+- `RETURN-DEMO-002` — return-risk scenario
+- `CHARGEBACK-DEMO-003` — chargeback-evidence scenario
+- `ABUSE-DEMO-004` — abuse-ring scenario
+
+These are explicitly marked **SIMULATED DEMO SCENARIO**.
+
+## System status
+
+The application reports component status from the backend implementation.
+
+Services such as PostgreSQL, Redis, Redpanda, and an external LLM are not presented as active infrastructure unless they are actually configured and implemented.
+
+## Safety design
+
+- No autonomous blocking or punishment.
+- No autonomous chargeback submission.
+- Human review is required for consequential responses.
+- Risk explanations and evidence are surfaced for investigators.
+- Demo incidents are synthetic and clearly identified.
+- The response policy is deterministic and inspectable.
+- The project does not claim production infrastructure that is not present.
+
+## API
+
+The FastAPI backend includes:
+
+- `GET /api/health`
+- `GET /api/system-status`
+- `GET /api/auth/demo-users`
+- `POST /api/auth/login`
+- `GET /api/model`
+- `POST /api/score`
+- `GET /api/transactions`
+- `GET /api/spike`
+- `GET /api/abuse-ring`
+- `GET /api/return-risk`
+- `POST /api/return-risk`
+- `GET /api/investigate/{transaction_id}`
+- `GET /api/chargeback-evidence/{transaction_id}`
+- `POST /api/chargeback-evidence/{transaction_id}/respond`
+- `GET /api/response-policy`
+- `GET /api/incidents`
+- `GET /api/incidents/{incident_id}`
+- `GET /api/overview`
+- `POST /api/demo/reset`
+- `POST /api/outcomes`
+
+## Run locally
+
+### Python
+
+```bash
+pip install -r requirements.txt
 python -m uvicorn backend.main:app --reload
 ```
 
-Open `http://127.0.0.1:8000/`.
+Open:
 
-## Demo authentication
+```text
+http://127.0.0.1:8000
+```
 
-Selecting `analyst`, `lead_analyst`, or `admin` fills the local demo username and password. The password input is masked by default and has a show/hide control.
+### Docker
 
-These are demo credentials only; this is not production authentication.
+```bash
+docker compose up --build
+```
 
-## Safety boundary
+Then open:
 
-The application is intentionally defense-only. Recommendations require human review and the response policy never performs autonomous blocking or dispute submission.
+```text
+http://127.0.0.1:8000
+```
+
+## Demo accounts
+
+| Role | Username | Password |
+|---|---|---|
+| Analyst | `analyst@demo.local` | `analyst-demo-2026` |
+| Lead Analyst | `lead@demo.local` | `lead-demo-2026` |
+| Admin | `admin@demo.local` | `admin-demo-2026` |
+
+These are demo-only credentials.
+
+## Project philosophy
+
+> **Build → Break → Fix → Ship**
+
+Build systems. Test them. Fix what breaks. Ship working products.
+
+---
+
+**ShieldKnot AI v2**  
+**THIRAZEN™**  
+*Turning ideas into products.*
