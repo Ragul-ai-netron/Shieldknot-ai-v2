@@ -93,6 +93,14 @@ The FastAPI backend includes:
 - `POST /api/demo/reset`
 - `POST /api/outcomes`
 
+## 🚀 Live Demo
+
+**[Open ShieldKnot AI v2 Live Demo](https://ragul-ai-netron.github.io/shieldknot-ai-v2-live/)**
+
+The public demo runs as a browser-based GitHub Pages deployment using synthetic demo data.
+
+**Workflow:** Detect → Investigate → Explain → Human Review → Respond
+
 ## Run locally
 
 ### Python
@@ -141,3 +149,4 @@ Build systems. Test them. Fix what breaks. Ship working products.
 **ShieldKnot AI v2**  
 **THIRAZEN™**  
 *Turning ideas into products.*
+
